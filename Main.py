@@ -18,6 +18,7 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 load_dotenv()
 from top_bar import TopBar
+import sys
 
 
 OPEN_WEATHER_API_KEY = os.getenv("OPEN_WEATHER_API_KEY")
@@ -26,6 +27,11 @@ SETTINGS_FILE = "settings.json"
 
 about_popup = None
 
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller/Nuitka """
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
 
 def save_location_preference(city_name):
     try:
